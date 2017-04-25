@@ -3139,6 +3139,8 @@ def main():
     groupS.add_argument("-v", "--version", action="version",
                         version='%(prog)s ' + version,
                         help="print program version")
+    groupS.add_argument("--raw", action="store_true", default=False,
+                        help="parse raw media wiki for debug")
 
     args = parser.parse_args()
 
@@ -3202,6 +3204,12 @@ def main():
     # sharing cache of parser templates is too slow:
     # manager = Manager()
     # templateCache = manager.dict()
+
+
+    if args.raw:
+        file = fileinput.FileInput(input_file, openhook=fileinput.hook_compressed)
+        Extractor(0, 0, "raw", file).extract(open("raw.json", "w"))
+        return
 
     if args.article:
         if args.templates:
