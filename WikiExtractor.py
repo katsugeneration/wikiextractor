@@ -3164,7 +3164,7 @@ def main():
     options.expand_templates = args.no_templates
     options.filter_disambig_pages = args.filter_disambig_pages
     options.keep_tables = args.keep_tables
-    options.abstract_only = abstract_only
+    options.abstract_only = args.abstract_only
 
     try:
         power = 'kmg'.find(args.bytes[-1].lower()) + 1
