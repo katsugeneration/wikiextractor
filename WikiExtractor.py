@@ -626,6 +626,8 @@ class Extractor(object):
         # $dom = $this->preprocessToDom( $text, $flag );
         # $text = $frame->expand( $dom );
         #
+        if options.abstract_only:
+            text = text.split('==')[0]
         text = self.transform(text)
         text = self.wiki2text(text)
         text = compact(self.clean(text))
@@ -3141,6 +3143,8 @@ def main():
                         help="print program version")
     groupS.add_argument("--raw", action="store_true", default=False,
                         help="parse raw media wiki for debug")
+    groupS.add_argument("--abstract_only", action="store_true", default=False,
+                        help="output text only abstract content")
 
     args = parser.parse_args()
 
